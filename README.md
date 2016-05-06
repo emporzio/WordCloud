@@ -22,7 +22,7 @@ Other Notes:
 CloudWindow ) were created and supplied by Dr. Allen. I then took that code and added my own class, Counter, along with some
 methods in the class WordCloud. I changed some of the supplied methods to make them more versatile and efficient.
 
-- Uses the default file dream.txt, or MLK's "I Have A Dream" speech. By uncommenting line 45 of WordCloud class ( wc.addPage() ),
+- Uses the default file dream.txt, or MLK's "I Have A Dream" speech. By uncommenting line 45 of the WordCloud class ( wc.addPage() ),
 this program will also read in an e-book url link (Alice in Wonderland) and display how often certain words appear in that body 
 of text as well. 
 
