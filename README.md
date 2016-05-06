@@ -30,12 +30,11 @@ Future Plans:
 -------------
 
 - Currently, the counter counts html tags on a website when adding a webpage as well as regular text words, so only e-book links work properly. 
-However, even with e-book links, there are a few strings of numbers that are being counted. The plan is to fix this so that any url can be 
-inputted.
+However, even with e-book links, there are a few strings of numbers that are being counted. The plan is to fix this so that any url can be inputted and the WordCloud will operate as it is supposed to.
 
 - There is currently a limit as to how many words can be stored in the WordCloud. I haven't decided whether or not to up the limit of
 words that will appear in the WordCloud or whether or not WordCloud will only score the top 'n' most common words, and then sort
-them in alphabetical order.
+them in alphabetical order. This will come with a future update.
 
 Contact:
 --------
