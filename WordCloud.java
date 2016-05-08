@@ -87,16 +87,16 @@ public class WordCloud
     {
     	try 
     	{
-			countWordsFromReader( new InputStreamReader( new URL(url).openStream() ) );
-		} 
+		countWordsFromReader( new InputStreamReader( new URL(url).openStream() ) );
+	} 
     	catch ( MalformedURLException e ) 
     	{
-			e.printStackTrace();
-		} 
+		e.printStackTrace();
+	} 
     	catch ( IOException e ) 
     	{
-			e.printStackTrace();
-		}
+		e.printStackTrace();
+	}
     }
     
     /**
@@ -118,12 +118,12 @@ public class WordCloud
     {
     	try 
     	{
-			countWordsFromReader( new FileReader( inFile ) );
-		} 
+		countWordsFromReader( new FileReader( inFile ) );
+	} 
     	catch (FileNotFoundException e) 
     	{
-			e.printStackTrace();
-		}
+		e.printStackTrace();
+	}
     }
     
     /**
@@ -213,11 +213,11 @@ public class WordCloud
 		} 
          catch ( FileNotFoundException e ) 
          {
-      	   System.err.println( "File not found!" );
+      	 	System.err.println( "File not found!" );
          } 
     	 catch ( IOException e ) 
     	 {
-    		 System.err.println( "Error!" );
+    		System.err.println( "Error!" );
     	 }
     }    
     /**
