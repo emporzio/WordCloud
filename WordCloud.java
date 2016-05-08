@@ -100,20 +100,20 @@ public class WordCloud
     }
     
     /**
-     * Creates the CloudWindow and displays the end results in the window.
-     */
+    * Creates the CloudWindow and displays the end results in the window.
+    */
     public void show()
     {
     	CloudWindow cw = new CloudWindow();
         cw.makeWindow( counts, "I Have a Dream" );
     }
     
-    /**
-     * The inFile should be an accessible text-file. Counts the 
-     * number of times each word appears in a given input file.
-     * 
-     * @param inFile Name of file to read lines from.
-     */
+   /**
+    * The inFile should be an accessible text-file. Counts the 
+    * number of times each word appears in a given input file.
+    * 
+    * @param inFile Name of file to read lines from.
+    */
     private void countWordsFile( String inFile )
     {
     	try 
@@ -126,115 +126,116 @@ public class WordCloud
 	}
     }
     
-    /**
-     * Takes in a 'common words' file( should be accessible text-file), 
-     * reads through each line, and stores each word into ArrayList 
-     * commonWords.
-     * 
-     * @param inFile Name of file to read lines from.
-     */
+   /**
+    * Takes in a 'common words' file( should be accessible text-file), 
+    * reads through each line, and stores each word into ArrayList 
+    * commonWords.
+    * 
+    * @param inFile Name of file to read lines from.
+    */
     private void loadCommon( String inFile )
     {
-       try 
-       {
-    	   BufferedReader br = new BufferedReader( new FileReader( inFile ) );
+    	try 
+       	{
+       		BufferedReader br = new BufferedReader( new FileReader( inFile ) );
     	   
-    	   String line = br.readLine();
-    	   commonWords.add( line );
+    	   	String line = br.readLine();
+    		commonWords.add( line );
     	   
-    	   while( line != null ) 
-    	   {
-    		   line = br.readLine();
-    		   commonWords.add( line );
-    	   }
+    	   	while( line != null ) 
+    	   	{
+    	   		line = br.readLine();
+    			commonWords.add( line );
+    		}
     	   
-    	   br.close();
+    	   	br.close();
        } 
        catch (FileNotFoundException e) 
        {
-    	   System.err.println( "File not found!" );
+       	System.err.println( "File not found!" );
        } 
        catch (IOException e) 
        {
-    	   System.err.println( "Error!" );
+       	System.err.println( "Error!" );
        }
     }
     
-    /**
-     * Pre: the inFile should be an accessible text-file/url.
-     *
-     * Post:  the number of occurrences for each word from the input file/url that is
-     * not in the common list should be determined;  the counts list will consist of
-     * one Counter object per non-common word, holding the count of that word.
-     *
-     * @param inFile Name of file to read lines from.
-     */
+   /**
+    * Pre: the inFile should be an accessible text-file/url.
+    *
+    * Post:  the number of occurrences for each word from the input file/url that is
+    * not in the common list should be determined;  the counts list will consist of
+    * one Counter object per non-common word, holding the count of that word.
+    *
+    * @param inFile Name of file to read lines from.
+    */
     private void countWordsFromReader( Reader inFile )
     {
-    	 try 
-         {
-      	   BufferedReader br = new BufferedReader( inFile );
+    	try 
+        {
+      		BufferedReader br = new BufferedReader( inFile );
       	   
-      	   String line = br.readLine();
+      	   	String line = br.readLine();
       	   
-			while ( line != null ) 
+		while ( line != null ) 
+		{
+			String[] r1 = splitLine( line );
+		
+			// loops through each word in the line and checks
+			// whether or not the word is in the common words list
+			for ( int i = 0; i < r1.length; i++ ) 
 			{
-				String[] r1 = splitLine( line );
-				
-				// loops through each word in the line and checks
-				// whether or not the word is in the common words list
-				for ( int i = 0; i < r1.length; i++ ) 
+				// checks if the word in array r1 is in ArrayList
+				// commonWords
+				if ( !commonWords.contains( r1[i] ) ) 
 				{
-					// checks if the word in array r1 is in ArrayList
-					// commonWords
-					if ( !commonWords.contains( r1[i] ) ) 
-					{
-						Counter c = new Counter( r1[i], 1 );
+					Counter c = new Counter( r1[i], 1 );
 
-						// checks if word already exists in Counter
-						if ( counts.indexOf(c) != -1 ) 
+					// checks if word already exists in Counter
+					if ( counts.indexOf(c) != -1 ) 
+					{
+						for ( WordCounter j : counts ) 
 						{
-							for ( WordCounter j : counts ) 
+							if ( j.equals( c ) ) 
 							{
-								if ( j.equals( c ) ) 
-								{
-									counts.remove( r1[i] );
-									j.setCount( j.getCount() + 1 );
-								}
+								counts.remove( r1[i] );
+								j.setCount( j.getCount() + 1 );
 							}
-						} 
-						else
-							counts.add( c );
-					}
+						}
+					} 
+					else
+						counts.add( c );
 				}
-				line = br.readLine();
 			}
-			br.close();
-		} 
-         catch ( FileNotFoundException e ) 
-         {
-      	 	System.err.println( "File not found!" );
-         } 
-    	 catch ( IOException e ) 
-    	 {
+			line = br.readLine();
+		}
+		br.close();
+	} 
+        catch ( FileNotFoundException e ) 
+        {
+      		System.err.println( "File not found!" );
+        } 
+    	catch ( IOException e ) 
+    	{
     		System.err.println( "Error!" );
-    	 }
-    }    
-    /**
-     *post: returns array containing individual words in s, after removing
-     *punctuation and converting to lower-case
-     * 
-     * @param s
-     * @return wds
-     */
-    private String[] splitLine( String s )
-    {
-        // remove punctuation from line and convert to lower-case
-        s = s.replaceAll( "\\p{Punct}", "" );
-        s = s.toLowerCase();
+    	}
+  }    
+  
+  /**
+   * post: returns array containing individual words in s, after removing
+   * punctuation and converting to lower-case
+   *  
+   *  @param s
+   *  @return wds
+   */
+   private String[] splitLine( String s )
+   {
+       // remove punctuation from line and convert to lower-case
+       s = s.replaceAll( "\\p{Punct}", "" );
+       s = s.toLowerCase();
         
-        // create array by splitting out all white space
-        String[] wds = s.trim().split( "\\s+" );
-        return wds;
-    }
+       // create array by splitting out all white space
+       String[] wds = s.trim().split( "\\s+" );
+       return wds;
+   }
 }
